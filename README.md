@@ -2,7 +2,7 @@
 
 This repository is dedicated to the foundational, first phase of a larger AI sound design pipeline. The goal is to build an advanced Video-to-Text (V2T) system that generates a detailed, multi-track audio "script" from any given video. This script will serve as the primary input for a future Text-to-Audio (T2A) or Text-Video-to-Audio (TV2A) model, automating the creative process of sound design.
 
-The project is built by forking and enhancing an open-source video-LLM, specifically `Video-LLaVA`, as its foundational model.
+The project is built by forking and enhancing an open-source video-LLM, specifically [Video-LLaVA](https://github.com/PKU-YuanGroup/Video-LLaVA), as its foundational model.
 
 ---
 
@@ -10,7 +10,7 @@ The project is built by forking and enhancing an open-source video-LLM, specific
 
 Instead of a single, simple video caption, this project focuses on a sophisticated, multi-stage V2T pipeline that mimics a human sound designer's thought process. It uses a "chain-of-thought" approach where the model breaks down the task into smaller, more manageable steps to ensure a highly granular and accurate output. This approach is designed to generate multiple, distinct text descriptions for different audio layers.
 
-#### **Phase 1: Video Analysis & Categorization**
+#### **Phase 1: Chain-of-Thought Reasoning**
 
 This phase uses the multimodal capabilities of a Video-LLaVA-based model to analyze a video and perform the following tasks sequentially:
 
@@ -22,11 +22,13 @@ This phase uses the multimodal capabilities of a Video-LLaVA-based model to anal
     * What is the context or environment?
     * What are all the potential sounds that would occur as a result of this action?
 
-3.  **Output Categorization:** The model then takes the answers to these questions and synthesizes them into a structured output, categorized for multi-track audio generation. 
+#### **Phase 2: Output Categorization**
+
+The goal of this phase is to use the reasoning from Phase 1 to synthesize a structured output. The output will be a detailed, machine-readable text format (e.g., JSON) that isolates each individual object, subject, or ambient event. This ensures that every component of an event happening in the video is isolated for future individual audio generation. This is a crucial step that prepares the data for a future audio generation model.
 
 #### **Output of the Pipeline**
 
-The final output is a clean, machine-readable text format (e.g., JSON) that contains a set of text descriptions dedicated to each audio category. This is a crucial step that prepares the data for a future audio generation model.
+The final output is a clean, machine-readable text format (e.g., JSON) that contains a set of text descriptions dedicated to each audio category.
 
 ```json
 {
